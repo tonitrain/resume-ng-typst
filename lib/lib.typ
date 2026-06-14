@@ -12,7 +12,7 @@
 // The project function defines how your document looks.
 // It takes your content and some metadata and formats it.
 // Go ahead and customize it to your liking!
-#let project(title: "", author: (), contacts: (), body) = {
+#let project(title: "", author: (), contacts: (), avatar: none, header-left: none, body) = {
   // Set the document's basic properties.
   set document(author: author.name, title: title)
   set page(
@@ -21,14 +21,45 @@
   )
     
   // set text(font: "Linux Libertine", lang: "en")
-  set text(font: "Noto Serif CJK SC", lang: "zh")
+  set text(font: "Songti SC", lang: "zh")
     
   // Title row.
-  align(center)[
-    #block(text(weight: 700, 1.7em, author.name))
-  ]
-  
-  resume-contacts(contacts)
+  if avatar == none {
+    align(center)[
+      #block(text(weight: 700, 1.7em, author.name))
+    ]
+
+    resume-contacts(contacts)
+  } else if header-left != none {
+    grid(
+      columns: (1fr, auto),
+      column-gutter: 0.8cm,
+      [
+        #align(center)[
+          #block(text(weight: 700, 1.7em, author.name))
+          #resume-contacts(contacts)
+        ]
+        #v(0.3cm)
+        #header-left
+      ],
+      align(right)[
+        #image(avatar, height: 4.2cm)
+      ],
+    )
+  } else {
+    grid(
+      columns: (1fr, auto, 1fr),
+      column-gutter: 0.5cm,
+      [],
+      align(center)[
+        #block(text(weight: 700, 1.7em, author.name))
+        #resume-contacts(contacts)
+      ],
+      align(right)[
+        #image(avatar, height: 4.2cm)
+      ],
+    )
+  }
 
   // Main body.
   set par(justify: true)
