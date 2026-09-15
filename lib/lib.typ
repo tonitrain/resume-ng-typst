@@ -43,7 +43,7 @@
         #header-left
       ],
       align(right)[
-        #image(avatar, height: 4.2cm)
+        #image(avatar, height: 4.0cm)
       ],
     )
   } else {
@@ -56,7 +56,7 @@
         #resume-contacts(contacts)
       ],
       align(right)[
-        #image(avatar, height: 4.2cm)
+        #image(avatar, height: 4.0cm)
       ],
     )
   }
